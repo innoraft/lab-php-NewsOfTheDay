@@ -4,13 +4,10 @@
 
 NEWS-OF-THE-DAY
 
-...............................................................................................................
 You will get daily tech news all over the world in your email and you can like every tech news daily 
 
-.................................................................................................................
 								Deployment Steps
-.................................................................................................................
-step 1: Go to global_variable.php and give your hostnane,username,password..
+step 1: Go to global_variable.php and give your servername,username,password..
 step 2: go to global variable.php and assign domain name to all variables.
 step 3: Run database_table_script.php script to generate database and table..
 step 4: store all the files in server
