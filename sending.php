@@ -23,11 +23,11 @@ $user_query=mysql_query($user_sql);
 					while($rsnews=mysql_fetch_assoc($news_query))
 					{
 
- 						$news.='<div style="padding-left:10px; padding-right:10px;"><div style="margin-bottom: 20px;background-color: #fff;border: 1px solid transparent; border-radius: 4px; border-color: #337ab7;"><div style=" padding: 10px 15px; border-bottom: 1px solid transparent;   border-top-left-radius: 3px;border-top-right-radius: 3px;color: #fff;background-color: #337ab7;border-color: #337ab7;"><b><a style="color:black;" href="'.$rsnews['link'].'">'.$rsnews['title'].'</a></b></div><p style="float:right; padding-right:20px;"><font color=#337ab7><b>Date of publication :</font>'.$rsnews['pubdate'].'</b></p><div style="padding: 15px;"><img src="https:'.$rsnews['image'].'"><p>'.$rsnews['description'].'</p><br><p><a href="'.$sending_like_mail.'/like.php?newsID='.$rsnews['news_id'].'&email='.$users['email'].'&unicode='.$users['unicode'].'">LIKE</a></p></div></div></div>';
+ 						$news.='<div style="padding-left:10px; padding-right:10px;"><div style="margin-bottom: 20px;background-color: #fff;border: 1px solid transparent; border-radius: 4px; border-color: #337ab7;"><div style=" padding: 10px 15px; border-bottom: 1px solid transparent;   border-top-left-radius: 3px;border-top-right-radius: 3px;color: #fff;background-color: #337ab7;border-color: #337ab7;"><b><a style="color:black;" href="'.$rsnews['link'].'">'.$rsnews['title'].'</a></b></div><p style="float:right; padding-right:20px;"><font color=#337ab7><b>Date of publication :</font>'.$rsnews['pubdate'].'</b></p><div style="padding: 15px;"><img src="https:'.$rsnews['image'].'"><p>'.$rsnews['description'].'</p><br><p><a href="'.$_SERVER['SERVER_NAME'].'/like.php?newsID='.$rsnews['news_id'].'&email='.$users['email'].'&unicode='.$users['unicode'].'">LIKE</a></p></div></div></div>';
 
 
 					}
-						$unsubscribe='<a href="'.$delete_email.'/del.php?id='.$users['unicode'].'">Unsubscribe</a>';
+						$unsubscribe='<a href="'.$_SERVER['SERVER_NAME'].'/del.php?id='.$users['unicode'].'">Unsubscribe</a>';
 
 
 					$news=$head.$news.$unsubscribe;
