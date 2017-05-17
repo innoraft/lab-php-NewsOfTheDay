@@ -9,7 +9,7 @@
 
 //.......CREATE DATABASE tech_mail........
 
-	$create_database = mysql_query("CREATE DATABASE tech_mail;");
+	$create_database = mysql_query("CREATE DATABASE ".$database_name." ;");
 	mysql_select_db($database_name,$db);
 	if($create_database == TRUE)
 	{
