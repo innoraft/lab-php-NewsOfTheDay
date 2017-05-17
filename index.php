@@ -221,7 +221,7 @@
           <div class="row">
             <div class="col-md-12">
               <div style="text-align:center;font-family:Oswald;"><h2>TOP ACTIVE FOLLOWERS</h2></div>
-              <div>
+              <div style="padding-left:110px;">
                  <?php include 'usergraph.php' ?>
                 <div id="piechart" style="width:1200px; height: 600px;"></div>
               </div>
