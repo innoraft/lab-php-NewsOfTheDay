@@ -1,7 +1,6 @@
-
 <?php
 $servername = 'localhost';
 $username = 'root';
-$password = '******';
+$password = 'rudranil';
 $database_name='tech_mail';
 ?>

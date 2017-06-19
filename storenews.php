@@ -1,47 +1,40 @@
 <?php
 include 'dbconfig.php';
-$i=1;
-$xml=simplexml_load_file("https://news.google.co.in/news?cf=all&hl=en&pz=1&ned=in&topic=tc&output=rss");
+$xml=simplexml_load_file("http://feeds.feedburner.com/TechCrunch/");
+$i = 0;
 	foreach ($xml->channel->item as $itm)
 	{
-	  
 		$title = $itm->title;
 		$link = $itm->link;
-		$pubdate= $itm->pubDate;
+		$pubdate = $itm->pubDate;
+	    $category = $itm->category;
+	    $guid = $itm->guid;
 		$description = $itm->description;
+
+
 
 
 		 	$s = $pubdate;
     		$dt = new DateTime($s);
     		$date = $dt->format('Y-m-d');
-		     $day=date('l', strtotime($date));
-
-        		$description=str_replace("table", "div", $description);
-       			$description=str_replace("/table", "/div", $description); 
-        		$description= preg_replace( '/style=(["\'])[^\1]*?\1/i', '', $description, -1 );
+		     $date= strtotime($date);
+        		
         		$description=strip_tags($description,'<img><a></a>');
-
 		        $doc = new DOMDocument();
 		        @$doc->loadHTML($description);
 		        $xpath = new DOMXPath($doc);
 		        $src = $xpath->evaluate("string(//img/@src)");
 		        $description = preg_replace("/<img[^>]+\>/i", " ", $description);
-
-
-		        	 if($i <= 7)
-		        	 {
-		        	 	echo $title.'<br>';
-		        	 	echo $description.'<br>';
-		        	 	echo $date.'<br>';
-		        	 	echo $day.'<br>';
-		        		$sql = "INSERT INTO news (title,link,image,description,pubdate,day) VALUES ('$title','$link','$src','$description','$date','$day')";
-		        		mysql_query($sql,$db);  
-				 		
-		        	 }
-		        	 $i++;
-
+		         $description=strip_tags($description,'');
+		         $description = preg_replace("/Read More/", " ", $description);
+		        	
+		         	$guid = str_replace("http://techcrunch.com/?p="," ",$guid);
+		 		if($i <= 10)
+		 		{    	
+		        	$sql = "INSERT INTO news (guid,title,link,image,description,category,pubdate) VALUES ($guid,'$title','$link','$src','$description','$category',$date)";
+		         	mysql_query($sql,$db);
+		         	$i++;
+		        }
+		        		
 	}
 ?>
-
-
-

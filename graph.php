@@ -1,48 +1,25 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <?php
+
 include 'dbconfig.php';
 if(isset($_GET['datee']))
 {
- // $date ='2017-05-15'; $_GET['datee'];
-  //$date = str_replace('/', '-', $originalDate);
-  //$date = date("Y-m-d", strtotime($date));
+
   $date=$_GET['datee'];
-
-  
+   $date= strtotime($date);
   $lista = array();
   $dens = array();
   $cor = array();
-  $cor[0] = '#ff3300';
-  $cor[1] = '#0000ff';
-  $cor[2] = '#006600';
-  $cor[3] = '#ff0066';
-  $cor[4] = '#ff0067';
   $i=0;
-  $sql= "SELECT news.title title, COUNT( likes.news_id ) total_likes FROM news, likes WHERE likes.news_id = news.news_id AND date_time = '$date' GROUP BY likes.news_id order by likes.news_id desc limit 5";
+  $sql= "SELECT news.title title, COUNT( likes.news_id ) total_likes FROM news, likes WHERE likes.news_id = news.news_id AND date = $date GROUP BY likes.news_id order by likes.news_id";
   $resultado=mysql_query($sql);
-    while($row = mysql_fetch_assoc($resultado))
-    {
-      $id = $row['title'];
-      $likess = $row['total_likes'];
-      $lista[$i] = $id;
-      $dens[$i]=$likess;
-      $i=$i+1;
-
-    } 
-  }
-  else
+  $count=mysql_num_rows($resultado);
+  if($count == 0)
   {
-    $date=date("Y-m-d");
-  $lista = array();
-  $dens = array();
-  $cor = array();
-  $cor[0] = '#ff3300';
-  $cor[1] = '#0000ff';
-  $cor[2] = '#006600';
-  $cor[3] = '#ff0066';
-  $cor[4] = '#ff0067';
-  $i=0;
-  $sql= "SELECT news.title title, COUNT( likes.news_id ) total_likes FROM news, likes WHERE likes.news_id = news.news_id AND date_time = '$date' GROUP BY likes.news_id order by likes.news_id desc limit 5";
-  $resultado=mysql_query($sql);
+      echo '<h1 style="color:red;">NO DATA FOUND</h1>';
+      exit();
+
+  }
     while($row = mysql_fetch_assoc($resultado))
     {
       $id = $row['title'];
@@ -50,14 +27,9 @@ if(isset($_GET['datee']))
       $lista[$i] = $id;
       $dens[$i]=$likess;
       $i=$i+1;
-
     } 
-
-
-
   }
 ?>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script type="text/javascript">
     google.charts.load("current", {packages:['corechart']});
     google.charts.setOnLoadCallback(drawChart);
@@ -67,12 +39,9 @@ if(isset($_GET['datee']))
           <?php 
             $k=$i;
              for ($i = 0; $i < $k; $i++) { ?>
-
               ['<?php echo $lista[$i] ?>',<?php echo $dens[$i] ?>,'<?php echo $cor[$i] ?>'],
               <?php } ?>
-
               ]);
-
       var view = new google.visualization.DataView(data);
       view.setColumns([0, 1,
                        { calc: "stringify",
@@ -80,17 +49,24 @@ if(isset($_GET['datee']))
                          type: "string",
                          role: "annotation" },
                        2]);
-
       var options = {
         title: "NEWS VS LIKES",
-        width: 1200,
-        height: 600,
-        bar: {groupWidth: "65%"},
+        height: 500,
+        bar: {groupWidth: "40%"},
         legend: { position: "none" },
+         vAxis: { 
+             title :'Number of likes',
+
+              },
+        hAxis: {
+               title :'News',
+              }
+
       };
       var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
       chart.draw(view, options);
   }
+   $(window).resize(function(){
+      drawChart();
+      });
   </script>
-
-
