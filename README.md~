@@ -16,9 +16,7 @@ step 3: Run database_table_script.php script to generate database and table..
 step 4: store all the files in server
 	 Cron setup
 	
-	1) 0 22 * * * domain name/storenews.php 
-		To store news in database every day 10pm. daily
-	2) 0 8 * * * domain name/sending.php
-		To send email to all user.. at 8:am daily
-	3) 0 12 * * 6 domain name/weekly_mail.php
-		To send mail every week sunday
+0 17 * * * news-of-the-day.sites.innoraft.com/storenews.php
+0 3 * * * news-of-the-day.sites.innoraft.com/sending.php
+0 13 * * 6 news-of-the-day.sites.innoraft.com/weekly_mail.php
+
