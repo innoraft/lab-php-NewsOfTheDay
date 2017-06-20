@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>LIKE</title>
+	<title>Tech2Mail</title>
 	<link href='//fonts.googleapis.com/css?family=Trade Winds' rel='stylesheet'>
 	 <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
@@ -9,6 +9,8 @@
 <body style="background:url(img/4.jpg);background-size:cover;">
      <div style="float:left;font-family: Trade Winds;font-size: 25px;"><a href="#index.html" class="navbar-brand"><h2 style="color:white";>TECH2MAIL</h2></a></div>
 	<?php
+	header('Pragma: no-cache');
+    header('Cache-Control: private, no-cache, no-store, max-age=0, must-revalidate, proxy-revalidate');
 	include 'dbconfig.php';
 	$news_id=$_GET['newsID'];
 	$email=$_GET['email'];

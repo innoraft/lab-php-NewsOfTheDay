@@ -60,7 +60,7 @@ if(!isset($_SESSION["username"]))
     </div>
   </div>
 </nav>
-<h3 align="center">ALL ADMIN</h3><br/>
+<h3 align="center">ALL USERS</h3><br/>
 <?php 
  $query = "SELECT email,unicode,status  from users";  
  $result = mysql_query($query);

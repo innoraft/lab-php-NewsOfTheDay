@@ -51,7 +51,7 @@ if(isset($_SESSION["username"]) && isset($_SESSION["email"]))
      <div class="form-group">
       <input type="button" name="login" id="login" class="btn btn-success" value="Login" />
      </div>
-     <li style="list-style-type: none;"><a href="forget.php">Forget Password? Click here </a></li>
+     <li style="list-style-type: none;">Forgot Password?<a href="forget.php"> Click here </a></li>
      <div id="error"></div>
     </form>
     <br />
