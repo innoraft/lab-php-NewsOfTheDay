@@ -108,8 +108,8 @@
                         <h4 style="float:left;">EMAIL:</h4>
                       <form id="submit_form">    
                    <input type="email" name="email" id="email" class="form-control" placeholder=" Enter Your Email Id" required /> 
-                     <div><span  id="error_message" class="text-danger">&nbsp;</span>
-                     <span  id="success_message" class="text-success">&nbsp;</span></div>
+                     <span><span style="float:left;"  id="error_message" class="text-danger">&nbsp;</span>
+                     <span style="float:left;" id="success_message" class="text-success">&nbsp;</span></span><br>
                      <input type="button" name="submit" id="submit" class="btn btn-submit" value="Subscribe Now" />
                     </form>  
                     </div>
@@ -134,21 +134,25 @@
               {
                  $('#error_message').html('');  
                 $.ajax({  
-                     url:"insert.php?email="+email,  
-                     type:"GET",  
-                     //data:{email:email},  
+                     url:"insert.php",  
+                     type:"POST",  
+                     data:{email:email},  
                      success:function(data){  
-                          $("form").trigger("reset");  
+                          $("#submit_form").trigger("reset");  
                           $('#success_message').css('visibility', 'visible').html(data);  
                           setTimeout(function(){  
                                $('#success_message').css('visibility', 'hidden');  
-                          }, 3000);  
+                          }, 4000);  
                      }  
                 });  
 
               }
               else{
                       $('#error_message').html('<font color="red"><b>Unauthorized Domain name</b></font>');
+                       setTimeout(function(){  
+                               $('#error_message').css('visibility', 'hidden');  
+                          }, 4000);  
+                         $('#error_message').css('visibility', 'visible');
               }
            }  
       });  

@@ -11,7 +11,7 @@ if(isset($_POST['cnewpassword']) and isset($_POST['auth']) and isset($_POST['Ema
       $query = mysql_query("UPDATE admin SET password = '".$cnewpassword."' WHERE password = '".$authcode."' AND email = '".$email."'");
       if(mysql_affected_rows() > 0)
       {
-        echo "<h3 style='color:red'>Password Changed</h3>";
+        echo "<h3 style='color:green'>Password Changed</h3>";
 
         exit();
       }

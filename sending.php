@@ -1,18 +1,21 @@
 <?php
 require 'mail.php';
 include 'dbconfig.php';
-$news_sql="select * from news where sent_status= 0 order by pubdate desc";
+$news_sql = "select * from news where sent_status= 0 order by pubdate desc";
 $news_query=mysql_query($news_sql);
+$total_count = mysql_num_rows($news_query);
 $news="";
-$user_sql="select * from users where status = 1 ";
-$user_query=mysql_query($user_sql);
+$user_sql = "select * from users where status = 1 ";
+$user_query = mysql_query($user_sql);
+
 ?>
 <!DOCTYPE html>
 <html>
 	<head></head>
 	<body>
 		<?php
-			
+			  if($total_count > 0)
+			  {
 			    $head='<center><h3>Todays Tech News</h3></center><br>';
 			   
 				while($users = mysql_fetch_assoc($user_query)) 
@@ -37,12 +40,12 @@ $user_query=mysql_query($user_sql);
 				 	} else {
 				 	    echo 'Message has been sent'.$users['email'].'<br>';
 				 	}
-					
 				 $mail->clearAddresses();
-				$news="";
+				 $news="";
 				}
 				$update_sql="update news set sent_status='1'";
 				 mysql_query($update_sql);
+			}
 		?>
 		
 	</body>

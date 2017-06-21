@@ -1,14 +1,13 @@
 <?php  
  //insert.php  
-include 'dbconfig.php';
 //if(isset($_GET['email']))
 //<?php  
  //insert.php  
 include 'dbconfig.php';
-if(isset($_GET['email']))
+if(isset($_POST['email']))
 {
  $randomString=""; 
-     				 $email=$_GET['email'];
+     				 $email=$_POST['email'];
      				 $s="SELECT * from users where email='$email'";
      				 $q = mysql_query($s,$db);
      				 $registration_data=mysql_fetch_assoc($q);
